@@ -17,3 +17,5 @@ run `npm install`
 run `npm run dev` to compile assets
 
 run `php artisan serve`
+
+run `php artisan voting:results` to manually send an email with the voting results (otherwise scheduled to be sent daily at 23:59)
