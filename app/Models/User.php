@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'voted'
     ];
 
     /**
@@ -41,4 +42,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the vote associated with the user.
+     */
+    public function vote()
+    {
+        return $this->hasOne(Vote::class);
+    }
 }
