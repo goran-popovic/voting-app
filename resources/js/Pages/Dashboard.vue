@@ -32,7 +32,7 @@ const submit = () => {
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto px-4 lg:px-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="shadow-sm sm:rounded-lg">
                     <BreezeValidationErrors class="mb-4" />
                     <template v-if="!alreadyVoted">

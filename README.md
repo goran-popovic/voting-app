@@ -6,9 +6,13 @@ Copy the .env.example file and rename it to .env
 
 Create the database and populate the .env file with appropriate database details.
 
+Replace the SMTP details in the .env file with your own (you can use Mailtrap or similar service).
+
 ##### Basic
 
 run `composer install`
+
+run `php artisan key:generate`
 
 run `php artisan migrate`
 
