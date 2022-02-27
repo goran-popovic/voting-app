@@ -21735,7 +21735,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var classes = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return props.active ? 'inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-yellow-400 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-yellow-400 transition duration-150 ease-in-out';
+      return props.active ? 'inline-flex items-center pt-1 text-sm font-medium leading-5 text-yellow-400 transition duration-150 ease-in-out' : 'inline-flex items-center pt-1 text-sm font-medium leading-5 text-yellow-400 transition duration-150 ease-in-out';
     });
     var __returned__ = {
       props: props,
@@ -23667,7 +23667,7 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto px-4 lg:px-6"
+  "class": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
   "class": "shadow-sm sm:rounded-lg"
