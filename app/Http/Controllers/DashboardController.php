@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vote;
-use Illuminate\Http\Request;
+use App\Helpers\VoteItems;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -15,11 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $voteResult = Vote::where('user_id', $user->id)->first() ?? null;
-
         return Inertia::render('Dashboard', [
-            'voteResult' => $voteResult,
+            'alreadyVoted' => auth()->user()->voted,
+            'voteItems' => array_keys(VoteItems::LIST)
         ]);
     }
 }

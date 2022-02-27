@@ -1,9 +1,26 @@
 <script setup>
+import { computed } from 'vue';
+
+const emit = defineEmits(['update:selected']);
 
 const props = defineProps({
     selected: {
         type: String,
         default: '',
+    },
+    value: {
+        default: null,
+    },
+    voteItems: Array
+});
+
+const proxySelect = computed({
+    get() {
+        return props.selected;
+    },
+
+    set(val) {
+        emit("update:selected", val);
     },
 });
 </script>
@@ -13,12 +30,12 @@ const props = defineProps({
         class="bg-black appearance-none text-yellow-400
         border-yellow-400 focus:border-yellow-400 focus:shadow-none
         focus:ring-yellow-400"
-        v-model="selected"
+        v-model="proxySelect"
+        :value="value"
     >
         <option value="">Please select one</option>
-        <option value="Doki Doki Literature Club">Doki Doki Literature Club</option>
-        <option value="Silent Hill 2">Silent Hill 2</option>
-        <option value="Amnesia: The Dark Descent">Amnesia: The Dark Descent</option>
-        <option value="Layers of Fear">Layers of Fear</option>
+        <option v-for="item in props.voteItems" :value="item">
+            {{ item }}
+        </option>
     </select>
 </template>

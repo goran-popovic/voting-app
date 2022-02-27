@@ -54,7 +54,11 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-yellow-400">
+                <Link :href="route('register')" class="underline text-sm text-yellow-400">
+                    Back to register
+                </Link>
+
+                <Link v-if="canResetPassword" :href="route('password.request')" class="ml-4 underline text-sm text-yellow-400">
                     Forgot your password?
                 </Link>
 

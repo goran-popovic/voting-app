@@ -20,10 +20,6 @@ defineProps({
                 <div class="grid text-center">
                     <div v-if="canLogin" class="px-6 py-4 sm:block">
                         <div v-if="$page.props.auth.user" class="max-w-lg">
-                            <p class="text-lg text-yellow-400 mb-16">
-                                Please proceed to your dashboard in order to vote or to check what you voted for.
-                            </p>
-
                             <Link :href="route('dashboard')"
                                   class="text-base uppercase text-black bg-yellow-400 p-2 rounded font-bold"
                             >
@@ -61,7 +57,3 @@ defineProps({
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

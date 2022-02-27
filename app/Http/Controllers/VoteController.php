@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProcessVote;
-use App\Models\User;
-use App\Models\Vote;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Stevebauman\Location\Facades\Location;
 
 class VoteController extends Controller
@@ -27,9 +23,8 @@ class VoteController extends Controller
         ]);
 
         $user = auth()->user();
-        $voteExists = Vote::where('user_id', $user->id)->first();
 
-        if(!$voteExists) {
+        if(!$user->voted) {
             $location = ($position = Location::get())
                 ? $position->countryName
                 : "Unknown Location";
@@ -40,8 +35,14 @@ class VoteController extends Controller
                 'ip_address' => $request->ip(),
                 'location' => $location,
             ]);
+
+            $user->update([
+                'voted' => true
+            ]);
+
+            return back();
         }
 
-        return redirect(RouteServiceProvider::HOME);
+        return back()->withErrors('You can vote only once.');
     }
 }

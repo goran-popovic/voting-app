@@ -6,6 +6,7 @@ use App\Mail\VotingResults;
 use App\Models\Vote;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use App\Helpers\VoteItems;
 
 class SendVotingResults extends Command
 {
@@ -34,12 +35,7 @@ class SendVotingResults extends Command
     {
         parent::__construct();
 
-        $this->results = [
-            'Doki Doki Literature Club' => 0,
-            'Silent Hill 2' => 0,
-            'Amnesia: The Dark Descent' => 0,
-            'Layers of Fear' => 0
-        ];
+        $this->results = VoteItems::LIST;
     }
 
     /**
@@ -49,14 +45,12 @@ class SendVotingResults extends Command
      */
     public function handle()
     {
-        $votes = Vote::all();
+        $votes = Vote::select('result')->get();
 
         if ($votes->isNotEmpty()) {
-            foreach ($this->results as $key => $result) {
-                foreach ($votes as $vote) {
-                    if($vote->result === $key) {
-                        $this->results[$key]++;
-                    }
+            foreach ($votes as $vote) {
+                if (isset($this->results[$vote->result])) {
+                    $this->results[$vote->result]++;
                 }
             }
 

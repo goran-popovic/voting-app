@@ -6,7 +6,8 @@ import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import {Head, useForm} from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
-    voteResult: null,
+    alreadyVoted: false,
+    voteItems: Array
 });
 
 const form = useForm({
@@ -15,7 +16,7 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('votes.store'), {
-        onFinish: () => form.reset('vote'),
+        onFinish: () => form.reset('vote')
     });
 };
 </script>
@@ -31,20 +32,21 @@ const submit = () => {
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 lg:px-6">
                 <div class="shadow-sm sm:rounded-lg">
-                    <template v-if="!voteResult">
+                    <BreezeValidationErrors class="mb-4" />
+                    <template v-if="!alreadyVoted">
                         <p class="py-6 text-yellow-400">
                             Vote for the best psychological horror game of all times bellow:
                         </p>
 
-                        <BreezeValidationErrors class="mb-4" />
-
                         <form @submit.prevent="submit">
-                            <BreezeSelect name="vote" v-model="form.vote" />
+                            <div class="mb-6 inline-block">
+                                <BreezeSelect name="vote" v-model:selected="form.vote" :vote-items="voteItems" />
+                            </div>
 
-                            <div class="ml-4 inline-block">
-                                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            <div class="inline-block submit-vote">
+                                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Submit your vote
                                 </BreezeButton>
                             </div>
@@ -54,12 +56,16 @@ const submit = () => {
                         <p class="py-6 text-yellow-400">
                             Thank you for voting!
                         </p>
-                        <p class="text-yellow-400">
-                            Your vote was: {{ voteResult.result }}
-                        </p>
                     </template>
                 </div>
             </div>
         </div>
     </BreezeAuthenticatedLayout>
 </template>
+<style scoped>
+    @media screen and (min-width: 456px) {
+        .submit-vote {
+            margin-left: 2rem;
+        }
+    }
+</style>
