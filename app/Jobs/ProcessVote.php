@@ -55,7 +55,11 @@ class ProcessVote implements ShouldQueue
     public function failed(Throwable $exception)
     {
         $user = $this->params['user'];
-        $user->vote->delete();
+
+        if($user->vote()->exists()) {
+            $user->vote->delete();
+        }
+        
         $user->update([
             'voted' => false
         ]);
